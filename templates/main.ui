@@ -133,6 +133,13 @@
               </widget>
              </item>
              <item>
+              <widget class="QRadioButton" name="radioButton_5">
+               <property name="text">
+                <string>조퇴</string>
+               </property>
+              </widget>
+             </item>
+             <item>
               <widget class="QRadioButton" name="radioButton_3">
                <property name="text">
                 <string>병가</string>
