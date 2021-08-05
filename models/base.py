@@ -16,20 +16,12 @@ class user(Base):
   __tablename__ = 'users'
   id = Column(Integer, primary_key=True, autoincrement=True, index=True)
   name = Column(String(20), unique=True)
-  password_hash = Column(String(128))
   position_id = Column(Integer, ForeignKey("positions.id"))
   position = relationship("position", foreign_keys=[position_id])
   part_id = Column(Integer, ForeignKey("parts.id"))
   part = relationship("part", foreign_keys=[part_id])
   start_date = Column(Date)
   status = Column(Boolean)
-
-def set_password(self, password):
-  self.password_hash = generate_password_hash(password)
-
-def check_password(self, password):
-  return check_password_hash(self.password_hash,password)
-
 
 class position(Base):
   __tablename__ = 'positions'
