@@ -5,6 +5,9 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import QDate,Qt
 from db import session
+from crud.crud_user import *
+from crud.crud_part import *
+from crud.crud_position import *
 
 
 
@@ -13,9 +16,9 @@ from db import session
 class Add_user(QDialog):
     def __init__(self):
         super().__init__()
-        self.setupUI()
         self._db = next(session.get_db())
-        self.user_name = None
+        self.setupUI()
+
 
     def setupUI(self):
         self.setGeometry(1100, 200, 300, 100)
@@ -28,9 +31,9 @@ class Add_user(QDialog):
         start_date_label = QLabel("입사일: ")
 
         self.name_edit = QLineEdit()
-        self.part_edit = QLineEdit()
-        self.position_edit = QLineEdit()
-
+        self.part_edit = QComboBox()
+        self.position_edit = QComboBox()
+        self.additem()
         self.start_date = QDateEdit()
         self.start_date.setDate(QDate.currentDate())
 
@@ -51,21 +54,29 @@ class Add_user(QDialog):
         
 
         self.setLayout(layout)
+    def additem(self):
+        parts = get_all_part(db=self._db)
+        for part in parts:
+            self.part_edit.addItem(part.part)
+        positions = get_all_position(db=self._db)
+        for position in positions:
+            self.position_edit.addItem(position.position)
 
     def pushButtonClicked(self):
         self.user_name = self.name_edit.text()
-        self.user_part = self.part_edit.text()
-        self.user_position = self.position_edit.text()
-        self.start_date = self.start_date.date().toString(Qt.ISODate)
-        print(self.user_name,self.user_part,self.user_position,self.start_date)
-        # try:
-        #     create_user(
-        #         db=self_db,
-        #         user_name = self.user_name,
-        #         user_part = self.user_part,
-        #         user_position = self.user_position,
-        #         start_date = self.start_date
-        #     )
-        # except:
-        #     self.show_message("재시도")            
+        self.user_part = self.part_edit.currentText()
+        self.user_position = self.position_edit.currentText()
+        self.start_date = self.start_date.date()
+        print(type(self.user_name),type(self.user_part),type(self.user_position),type(self.start_date))
+        #try:
+        create_user(
+            db=self._db,
+            name = self.user_name,
+            part = self.user_part,
+            position = self.user_position,
+            start_date = self.start_date
+        )
         self.close()
+        #except:
+        self.show_message("재시도")            
+        
