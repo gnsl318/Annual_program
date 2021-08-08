@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>798</width>
+    <width>555</width>
     <height>593</height>
    </rect>
   </property>
@@ -19,8 +19,8 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>799</width>
-      <height>569</height>
+      <width>551</width>
+      <height>571</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -46,16 +46,23 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_8">
            <item>
-            <widget class="QComboBox" name="comboBox"/>
+            <widget class="QComboBox" name="name_list"/>
            </item>
            <item>
-            <widget class="QPushButton" name="add_user_btn">
+            <widget class="QPushButton" name="user_search_btn">
              <property name="text">
-              <string>인원추가</string>
+              <string>조회</string>
              </property>
             </widget>
            </item>
           </layout>
+         </item>
+         <item>
+          <widget class="QPushButton" name="add_user_btn">
+           <property name="text">
+            <string>인원추가</string>
+           </property>
+          </widget>
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -192,30 +199,30 @@
      </attribute>
      <layout class="QVBoxLayout" name="verticalLayout_6">
       <item>
-       <widget class="QTableWidget" name="tableWidget">
+       <widget class="QTableWidget" name="annual_table">
         <column>
          <property name="text">
-          <string>video</string>
+          <string>이름</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>image</string>
+          <string>부서</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>type_of_error</string>
+          <string>직위</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>label</string>
+          <string>입사일</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>comment</string>
+          <string>연차 수</string>
          </property>
         </column>
        </widget>
