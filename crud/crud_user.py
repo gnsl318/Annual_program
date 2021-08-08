@@ -28,3 +28,20 @@ def create_user(
         db.commit()
         return new_user
 
+def get_all_user(
+    *,
+    db:Session,
+):
+    user_info=db.query(User).join(Part,Position) 
+    return user_info
+
+def get_pp(
+    *,
+    db:Session,
+    name:str
+):
+    user_info = db.query(User).filter(User.name==name).first()
+    part = db.query(Part).filter(Part.id==user_info.part_id).first().part
+    position = db.query(Position).filter(Position.id == user_info.position_id).first().position
+    return part,position
+

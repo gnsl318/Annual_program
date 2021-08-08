@@ -61,6 +61,8 @@ class Add_user(QDialog):
         positions = get_all_position(db=self._db)
         for position in positions:
             self.position_edit.addItem(position.position)
+
+    
     @staticmethod
     def show_message(message):
         msg = QMessageBox()
@@ -72,7 +74,6 @@ class Add_user(QDialog):
         self.user_part = self.part_edit.currentText()
         self.user_position = self.position_edit.currentText()
         self.start_date = self.start_date.date().toPyDate()
-        print(type(self.user_name),type(self.user_part),type(self.user_position),type(self.start_date))
         try:
             create_user(
                 db=self._db,
