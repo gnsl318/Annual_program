@@ -6,6 +6,7 @@ from PyQt5.QtCore import QDate,QTime
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from db import session
 from add_user import Add_user
+from admin import Admin
 from crud import *
 
 
@@ -19,9 +20,10 @@ class App(QMainWindow, form_class):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self._db = next(session.get_db())
-        self.set_table()
-        self.func()
+        if self.admin_page():
+            self._db = next(session.get_db())
+            self.set_table()
+            self.func()
 
 
     def func(self):
@@ -32,6 +34,12 @@ class App(QMainWindow, form_class):
         self.add_user_btn.clicked.connect(self.add_user)
         self.user_info()
         self.user_search_btn.clicked.connect(self.search_info)
+        
+
+    def admin_page(self):
+        Admin_app = Admin()
+        Admin_app.exec_()
+        return True
         
 
     def set_table(self):
