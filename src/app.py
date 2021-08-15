@@ -19,11 +19,13 @@ form_class = uic.loadUiType(main_ui_path)[0]
 class App(QMainWindow, form_class):
     def __init__(self):
         super().__init__()
+        self.user_session= self.admin_page()
         self.setupUi(self)
-        if self.admin_page():
-            self._db = next(session.get_db())
+        self._db = next(session.get_db())
+        self.func()
+        if self.user_session == "admin":
             self.set_table()
-            self.func()
+        
 
 
     def func(self):
@@ -31,7 +33,10 @@ class App(QMainWindow, form_class):
         self.end_date.setDate(QDate.currentDate())
         self.start_time.setTime(QTime.currentTime())
         self.end_time.setTime(QTime.currentTime())
-        self.add_user_btn.clicked.connect(self.add_user)
+        if self.user_session == "admin": 
+            self.add_user_btn.clicked.connect(self.add_user)
+        else:
+            self.add_user_btn.setDisabled(True)
         self.user_info()
         self.user_search_btn.clicked.connect(self.search_info)
         
@@ -39,7 +44,7 @@ class App(QMainWindow, form_class):
     def admin_page(self):
         Admin_app = Admin()
         Admin_app.exec_()
-        return True
+        return Admin_app.id
         
 
     def set_table(self):

@@ -10,9 +10,6 @@ from crud.crud_part import *
 from crud.crud_position import *
 
 
-
-
-
 class Admin(QDialog):
     def __init__(self):
         super().__init__()
@@ -42,7 +39,7 @@ class Admin(QDialog):
         layout.addWidget(self.password_edit,1,1)
         layout.addWidget(self.login_btn,2,1)
         self.setLayout(layout)
-   
+        
     @staticmethod
     def show_message(message):
         msg = QMessageBox()
@@ -52,14 +49,13 @@ class Admin(QDialog):
     def pushButtonClicked(self):
         self.id = self.id_edit.text()
         self.password = self.password_edit.text()
-        admin_id,admin_password =session.get_admin()
+        admin_id,admin_password,password =session.get_admin()
         if self.password == admin_password and self.id == admin_id:
+            self.id = "admin"
             self.close()
-            return True
+            return self.id
+        elif self.password == password:
+            self.close()
+            return self.id
         else:
             self.show_message("로그인 실패")
-
-         
-
-        
-        
