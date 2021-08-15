@@ -10,15 +10,16 @@ from crud.crud_part import *
 from crud.crud_position import *
 
 
-class Admin(QDialog):
+class Login(QDialog):
     def __init__(self):
         super().__init__()
+        self._db = next(session.get_db())
         self.setupUI()
 
 
     def setupUI(self):
         self.setGeometry(1100, 200, 300, 100)
-        self.setWindowTitle("관리자")
+        self.setWindowTitle("Login")
         self.setWindowIcon(QIcon("icon.png"))
         
         
@@ -47,15 +48,15 @@ class Admin(QDialog):
         msg.exec_()
 
     def pushButtonClicked(self):
-        self.id = self.id_edit.text()
+        self.name = self.id_edit.text()
+        part,position = get_pp(db=self._db,name = self.name)
         self.password = self.password_edit.text()
-        admin_id,admin_password,password =session.get_admin()
-        if self.password == admin_password and self.id == admin_id:
-            self.id = "admin"
+        self.admin =session.get_admin(part)
+        if self.admin == True:
             self.close()
-            return self.id
-        elif self.password == password:
+            return self.name,self.admin
+        elif self.admin == False:
             self.close()
-            return self.id
+            return self.name,self.admin
         else:
             self.show_message("로그인 실패")

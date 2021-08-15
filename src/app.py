@@ -6,7 +6,7 @@ from PyQt5.QtCore import QDate,QTime
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from db import session
 from add_user import Add_user
-from admin import Admin
+from login import Login
 from crud import *
 
 
@@ -19,11 +19,11 @@ form_class = uic.loadUiType(main_ui_path)[0]
 class App(QMainWindow, form_class):
     def __init__(self):
         super().__init__()
-        self.user_session= self.admin_page()
+        self.name,self.admin= self.login_page()
         self.setupUi(self)
         self._db = next(session.get_db())
         self.func()
-        if self.user_session == "admin":
+        if self.admin:
             self.set_table()
         
 
@@ -33,18 +33,18 @@ class App(QMainWindow, form_class):
         self.end_date.setDate(QDate.currentDate())
         self.start_time.setTime(QTime.currentTime())
         self.end_time.setTime(QTime.currentTime())
-        if self.user_session == "admin": 
+        if self.admin: 
             self.add_user_btn.clicked.connect(self.add_user)
         else:
+            self.annual_table.setDisabled(True)
             self.add_user_btn.setDisabled(True)
-        self.user_info()
-        self.user_search_btn.clicked.connect(self.search_info)
+        self.user_info(self.name)
         
 
-    def admin_page(self):
-        Admin_app = Admin()
-        Admin_app.exec_()
-        return Admin_app.id
+    def login_page(self):
+        Login_app = Login()
+        Login_app.exec_()
+        return Login_app.name,Login_app.admin
         
 
     def set_table(self):
@@ -53,13 +53,13 @@ class App(QMainWindow, form_class):
         self.annual_table.setRowCount(user_list.count())
         row = 0
         for user in user_list:
-            
-            self.annual_table.setItem(row, 0, QTableWidgetItem(user.name))
-            self.annual_table.setItem(row, 1, QTableWidgetItem(user.part.part))
-            self.annual_table.setItem(row, 2, QTableWidgetItem(user.position.position))
-            self.annual_table.setItem(row, 3, QTableWidgetItem(str(user.start_date)))
-            self.annual_table.setItem(row, 4, QTableWidgetItem(str(user.annual_day)))
-            row +=1
+            if user.status:
+                self.annual_table.setItem(row, 0, QTableWidgetItem(user.name))
+                self.annual_table.setItem(row, 1, QTableWidgetItem(user.part.part))
+                self.annual_table.setItem(row, 2, QTableWidgetItem(user.position.position))
+                self.annual_table.setItem(row, 3, QTableWidgetItem(str(user.start_date)))
+                self.annual_table.setItem(row, 4, QTableWidgetItem(str(user.annual_day)))
+                row +=1
 
             
 
@@ -67,17 +67,13 @@ class App(QMainWindow, form_class):
         add_user_app = Add_user()
         add_user_app.exec_()
     
-    def user_info(self):
-        user_list = crud_user.get_all_user(db=self._db)
-        for user in user_list:
-            if user.status==True:
-                self.name_list.addItem(user.name)
+    def user_info(self,name):
+        part,position = crud_user.get_pp(db=self._db,name=name)
+        self.name_edit.setText(name)
+        self.Position_edit.setText(position)
+        self.Part_edit.setText(part)
 
-    def search_info(self):
-        user_name = self.name_list.currentText()
-        part,position = crud_user.get_pp(db=self._db,name = user_name)
-        self.team_name.setText(part)
-        self.Position_name.setText(position)
+
 
     @staticmethod
     def show_message(message):

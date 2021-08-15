@@ -12,11 +12,12 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 session = SessionLocal()
 
-def get_admin():
-    admin_id  = os.getenv('ADMIN_ID')
-    admin_password = os.getenv('ADMIN_PASSWORD')
-    password = os.getenv('PASSWORD')
-    return admin_id,admin_password,password
+def get_admin(part):
+    if part == "운영":
+        return True
+    else:
+        return False
+
 
 def get_db() -> Generator:
     try:
