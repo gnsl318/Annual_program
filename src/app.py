@@ -8,6 +8,7 @@ from db import session
 from add_user import Add_user
 from login import Login
 from crud import *
+import pandas as pd
 
 
 
@@ -35,9 +36,11 @@ class App(QMainWindow, form_class):
         self.end_time.setTime(QTime.currentTime())
         if self.admin: 
             self.add_user_btn.clicked.connect(self.add_user)
+            self.download_btn.clicked.connect(self.download)
         else:
             self.annual_table.setDisabled(True)
             self.add_user_btn.setDisabled(True)
+            self.download_btn.setDisabled(True)
         self.user_info(self.name)
         
 
@@ -48,11 +51,13 @@ class App(QMainWindow, form_class):
         
 
     def set_table(self):
-        user_list = crud_user.get_all_user(db=self._db)
+        self.user_list = crud_user.get_all_user(db=self._db)
         self.annual_table.setColumnCount(5)
-        self.annual_table.setRowCount(user_list.count())
+        self.annual_table.setRowCount(self.user_list.count())
         row = 0
-        for user in user_list:
+        
+        
+        for user in self.user_list:
             if user.status:
                 self.annual_table.setItem(row, 0, QTableWidgetItem(user.name))
                 self.annual_table.setItem(row, 1, QTableWidgetItem(user.part.part))
@@ -60,6 +65,8 @@ class App(QMainWindow, form_class):
                 self.annual_table.setItem(row, 3, QTableWidgetItem(str(user.start_date)))
                 self.annual_table.setItem(row, 4, QTableWidgetItem(str(user.annual_day)))
                 row +=1
+                
+
 
             
 
@@ -73,8 +80,13 @@ class App(QMainWindow, form_class):
         self.Position_edit.setText(position)
         self.Part_edit.setText(part)
 
-
-
+    def download(self):
+        df = pd.DataFrame(columns =['이름', '부서', '직위','입사일','연차 수'])
+        for num,user in enumerate(self.user_list):
+            if user.status:
+                df.loc[num] = user.name , user.part.part , user.position.position , str(user.start_date) , str(user.annual_day)
+        df.to_excel("연차정보.xlsx")
+    
     @staticmethod
     def show_message(message):
         msg = QMessageBox()
@@ -82,8 +94,6 @@ class App(QMainWindow, form_class):
         msg.exec_()
 
     
-
-
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = App()

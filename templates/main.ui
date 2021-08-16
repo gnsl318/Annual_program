@@ -213,6 +213,13 @@
           </column>
          </widget>
         </item>
+        <item>
+         <widget class="QPushButton" name="download_btn">
+          <property name="text">
+           <string>다운로드</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="tab_3">
