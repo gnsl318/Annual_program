@@ -23,6 +23,25 @@ class User(Base):
   status = Column(Boolean)
   annual_day = Column(Integer)
 
+class Annual(Base):
+  __tablename__ = "annuals"
+  id = Column(Integer, primary_key = True, autoincrement=True,index=True)
+  name_id = Column(Integer, ForeignKey("users.id"))
+  name = relationship("User",foreign_keys=[name_id])
+  start_day = Column(Date)
+  end_day = Column(Date)
+  start_time = Column(String(20))
+  end_time = Column(String(20))
+  kind_id = Column(String(20),ForeignKey("kinds.id"))
+  kind = relationship("Kind",foreign_keys=[kind_id])
+  annual_txt = Column(String(100))
+  
+class Kind(Base):
+  __tablename__ = "kinds"
+  id = Column(Integer, primary_key = True, autoincrement=True,index=True)
+  kind = Column(String(20), unique=True)
+  
+
 class Position(Base):
   __tablename__ = 'positions'
   id = Column(Integer, primary_key=True, autoincrement=True, index=True)
