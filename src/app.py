@@ -1,3 +1,4 @@
+from crud.crud_annual import create_annual
 import sys
 import os
 from PyQt5.QtWidgets import *
@@ -42,8 +43,24 @@ class App(QMainWindow, form_class):
             self.add_user_btn.setDisabled(True)
             self.download_btn.setDisabled(True)
         self.user_info(self.name)
+        self.save_btn.clicked.connect(self.save)
         
-
+    def save(self):
+        
+        button_list=[self.radioButton_1,self.radioButton_2,self.radioButton_3,self.radioButton_4,self.radioButton_5]
+        for button in button_list:
+            if button.isChecked():
+                print(self.name,self.position,self.part,
+                    self.start_date.text(),
+                    self.end_date.text(),
+                    self.start_time.text(),
+                    self.end_time.text(),
+                    #self.radioButton_1
+                    self.reason_text.toPlainText()
+                    )
+                print(button.text())
+                create_annual(db=self._db,name=self.name,start_day=self.start_date.text(),end_day=self.end_date.text(),
+                start_time=self.start_time.text(),end_time=self.end_time.text(),kind=button.text(),annual_txt=self.reason_text.toPlainText())
     def login_page(self):
         Login_app = Login()
         Login_app.exec_()
@@ -75,10 +92,10 @@ class App(QMainWindow, form_class):
         add_user_app.exec_()
     
     def user_info(self,name):
-        part,position = crud_user.get_pp(db=self._db,name=name)
+        self.part,self.position = crud_user.get_pp(db=self._db,name=name)
         self.name_edit.setText(name)
-        self.Position_edit.setText(position)
-        self.Part_edit.setText(part)
+        self.Position_edit.setText(self.position)
+        self.Part_edit.setText(self.part)
 
     def download(self):
         df = pd.DataFrame(columns =['이름', '부서', '직위','입사일','연차 수'])
