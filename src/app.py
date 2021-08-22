@@ -61,6 +61,7 @@ class App(QMainWindow, form_class):
                 print(button.text())
                 create_annual(db=self._db,in_name=self.name,start_day=self.start_date.text(),end_day=self.end_date.text(),
                 start_time=self.start_time.text(),end_time=self.end_time.text(),in_kind=button.text(),annual_txt=self.reason_text.toPlainText())
+                update_annual_day(db=self._db,name=self.name,kind=button.text())
     def login_page(self):
         Login_app = Login()
         Login_app.exec_()

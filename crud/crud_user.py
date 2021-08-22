@@ -45,3 +45,15 @@ def get_pp(
     position = db.query(Position).filter(Position.id == user_info.position_id).first().position
     return part,position
 
+def update_annual_day(
+    *,
+    db:Session,
+    name:str,
+    kind:str
+):
+    user = db.query(User).filter(User.name == name).first()
+    if kind == "연차":
+        user.annual_day -=  1
+    elif kind == "반차":
+        user.annual_day -= 0.5
+    db.commit()
