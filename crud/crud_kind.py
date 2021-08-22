@@ -6,5 +6,5 @@ def get_all_kind(
     *,
     db:Session,
 ):
-    positions = db.query(Kind).all()
-    return positions
+    kind = db.query(Kind).all()
+    return kind

@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from models.base import Annual
+from models.base import *
 
 
 def get_all_annual(
@@ -12,25 +12,26 @@ def get_all_annual(
 def create_annual(
     *,
     db : Session,
-    name:str,
+    in_name:str,
     start_day,
     end_day,
-    start_time:str,
-    end_time:str,
-    kind:str,
+    start_time,
+    end_time,
+    in_kind:str,
     annual_txt:str):
 
-    if db.query(User).filter(User.name == name).first()==None:
-        part_id=db.query(Part).filter(Part.part ==part).first().id
-        position_id = db.query(Position).filter(Position.position==position).first().id
-        new_user = User(
-            name=name,
-            position_id = position_id,
-            part_id = part_id,
-            start_date = start_date,
-            status = True,
-            annual_day = 0
-        )
-        db.add(new_user)
-        db.commit()
-        return new_user
+    name_id = db.query(User).filter(User.name == in_name).first().id
+    kind_id = db.query(Kind).filter(Kind.kind==in_kind).first().id
+
+    new_annual = Annual(
+        name_id=name_id,
+        start_day = start_day,
+        end_day = end_day,
+        start_time = start_time,
+        end_time = end_time,
+        kind_id = kind_id,
+        annual_txt = annual_txt
+    )
+    db.add(new_annual)
+    db.commit()
+    return new_annual

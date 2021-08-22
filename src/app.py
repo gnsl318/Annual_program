@@ -1,4 +1,3 @@
-from crud.crud_annual import create_annual
 import sys
 import os
 from PyQt5.QtWidgets import *
@@ -8,7 +7,8 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from db import session
 from add_user import Add_user
 from login import Login
-from crud import *
+from crud.crud_user import *
+from crud.crud_annual import *
 import pandas as pd
 
 
@@ -59,8 +59,8 @@ class App(QMainWindow, form_class):
                     self.reason_text.toPlainText()
                     )
                 print(button.text())
-                create_annual(db=self._db,name=self.name,start_day=self.start_date.text(),end_day=self.end_date.text(),
-                start_time=self.start_time.text(),end_time=self.end_time.text(),kind=button.text(),annual_txt=self.reason_text.toPlainText())
+                create_annual(db=self._db,in_name=self.name,start_day=self.start_date.text(),end_day=self.end_date.text(),
+                start_time=self.start_time.text(),end_time=self.end_time.text(),in_kind=button.text(),annual_txt=self.reason_text.toPlainText())
     def login_page(self):
         Login_app = Login()
         Login_app.exec_()
@@ -68,7 +68,7 @@ class App(QMainWindow, form_class):
         
 
     def set_table(self):
-        self.user_list = crud_user.get_all_user(db=self._db)
+        self.user_list = get_all_user(db=self._db)
         self.annual_table.setColumnCount(5)
         self.annual_table.setRowCount(self.user_list.count())
         row = 0
@@ -92,7 +92,7 @@ class App(QMainWindow, form_class):
         add_user_app.exec_()
     
     def user_info(self,name):
-        self.part,self.position = crud_user.get_pp(db=self._db,name=name)
+        self.part,self.position = get_pp(db=self._db,name=name)
         self.name_edit.setText(name)
         self.Position_edit.setText(self.position)
         self.Part_edit.setText(self.part)
