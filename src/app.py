@@ -44,6 +44,7 @@ class App(QMainWindow, form_class):
             self.annual_table.setDisabled(True)
             self.add_user_btn.setDisabled(True)
             self.download_btn.setDisabled(True)
+            self.edit_user_btn.setDisabled(True)
         self.user_info(self.name)
         self.save_btn.clicked.connect(self.save)
         
