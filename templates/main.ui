@@ -24,11 +24,11 @@
        <attribute name="title">
         <string>Edit</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout">
-        <item>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="0" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_5"/>
         </item>
-        <item>
+        <item row="1" column="0">
          <widget class="QFrame" name="frame">
           <property name="autoFillBackground">
            <bool>false</bool>
@@ -39,22 +39,53 @@
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
           </property>
-          <layout class="QGridLayout" name="gridLayout_2">
+          <layout class="QGridLayout" name="gridLayout_3">
+           <item row="0" column="1">
+            <widget class="QPushButton" name="edit_user_btn">
+             <property name="text">
+              <string>인원관리</string>
+             </property>
+            </widget>
+           </item>
            <item row="0" column="0">
-            <layout class="QHBoxLayout" name="horizontalLayout_8">
+            <widget class="QPushButton" name="add_user_btn">
+             <property name="text">
+              <string>인원추가</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0" colspan="2">
+            <widget class="QLineEdit" name="name_edit"/>
+           </item>
+           <item row="4" column="0" colspan="2">
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
              <item>
-              <widget class="QPushButton" name="add_user_btn">
-               <property name="text">
-                <string>인원추가</string>
+              <widget class="QTimeEdit" name="start_time">
+               <property name="displayFormat">
+                <string>hh:00</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QTimeEdit" name="end_time">
+               <property name="displayFormat">
+                <string>hh:00</string>
                </property>
               </widget>
              </item>
             </layout>
            </item>
-           <item row="1" column="0">
-            <widget class="QLineEdit" name="name_edit"/>
+           <item row="3" column="0" colspan="2">
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <item>
+              <widget class="QDateEdit" name="start_date"/>
+             </item>
+             <item>
+              <widget class="QDateEdit" name="end_date"/>
+             </item>
+            </layout>
            </item>
-           <item row="2" column="0">
+           <item row="2" column="0" colspan="2">
             <layout class="QHBoxLayout" name="horizontalLayout_3">
              <item>
               <widget class="QLineEdit" name="Position_edit"/>
@@ -74,46 +105,7 @@
              </item>
             </layout>
            </item>
-           <item row="3" column="0">
-            <layout class="QHBoxLayout" name="horizontalLayout_4">
-             <item>
-              <widget class="QDateEdit" name="start_date"/>
-             </item>
-             <item>
-              <widget class="QDateEdit" name="end_date"/>
-             </item>
-            </layout>
-           </item>
-           <item row="4" column="0">
-            <layout class="QHBoxLayout" name="horizontalLayout_2">
-             <item>
-              <widget class="QTimeEdit" name="start_time">
-               <property name="displayFormat">
-                <string>hh:00</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QTimeEdit" name="end_time">
-               <property name="displayFormat">
-                <string>hh:00</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item row="5" column="0">
-            <layout class="QHBoxLayout" name="horizontalLayout">
-             <item>
-              <widget class="QPushButton" name="save_btn">
-               <property name="text">
-                <string>저장</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item row="6" column="0">
+           <item row="6" column="0" colspan="2">
             <widget class="QGroupBox" name="groupBox">
              <property name="title">
               <string>근태종류</string>
@@ -170,6 +162,23 @@
               </item>
               <item>
                <widget class="QTextEdit" name="reason_text"/>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout">
+                <item>
+                 <widget class="QPushButton" name="save_btn">
+                  <property name="maximumSize">
+                   <size>
+                    <width>68</width>
+                    <height>32</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>저장</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
              </layout>
             </widget>

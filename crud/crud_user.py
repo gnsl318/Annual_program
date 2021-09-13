@@ -35,6 +35,14 @@ def get_all_user(
     user_info=db.query(User).join(Part,Position) 
     return user_info
 
+def get_user(
+    *,
+    db:Session,
+    name:str
+):
+    user = db.query(User).join(Part,Position).filter(User.name==name).first()
+    return user
+
 def get_pp(
     *,
     db:Session,
@@ -57,3 +65,44 @@ def update_annual_day(
     elif kind == "반차":
         user.annual_day -= 0.5
     db.commit()
+
+
+def update_user_info(
+    *,
+    db : Session,
+    name:str,
+    position:str,
+    part:str,
+    start_date):
+    user = db.query(User).filter(User.name == name).first()
+    user.name = name
+    user.position_id = db.query(Position).filter(Position.position==position).first().id
+    user.part_id = db.query(Part).filter(Part.part==part).first().id
+    user.start_date = start_date
+    db.commit()
+
+def update_total_annual(
+    *,
+    db:Session,
+    edit:str
+):
+    user_list = db.query(User).all()
+    if edit == "up":
+        for user in user_list:
+            user.annual_day +=1
+    elif edit == "down":
+        for user in user_list:
+            user.annual_day -=1
+    db.commit()
+    
+
+def update_state(
+    *,
+    db:Session,
+    name:str
+):
+    user = db.query(User).filter(User.name==name).first().status
+    user = False
+    db.commit()
+
+    

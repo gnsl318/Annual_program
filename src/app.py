@@ -6,6 +6,7 @@ from PyQt5.QtCore import QDate,QTime
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from db import session
 from add_user import Add_user
+from edit_user import Edit_user
 from login import Login
 from crud.crud_user import *
 from crud.crud_annual import *
@@ -37,6 +38,7 @@ class App(QMainWindow, form_class):
         self.end_time.setTime(QTime.currentTime())
         if self.admin: 
             self.add_user_btn.clicked.connect(self.add_user)
+            self.edit_user_btn.clicked.connect(self.edit_user)
             self.download_btn.clicked.connect(self.download)
         else:
             self.annual_table.setDisabled(True)
@@ -46,7 +48,6 @@ class App(QMainWindow, form_class):
         self.save_btn.clicked.connect(self.save)
         
     def save(self):
-        
         button_list=[self.radioButton_1,self.radioButton_2,self.radioButton_3,self.radioButton_4,self.radioButton_5]
         for button in button_list:
             if button.isChecked():
@@ -79,7 +80,9 @@ class App(QMainWindow, form_class):
                 self.annual_table.setItem(row, 4, QTableWidgetItem(str(user.annual_day)))
                 row +=1
                 
-
+    def edit_user(self):
+        edit_user_app = Edit_user()
+        edit_user_app.exec_()
 
             
 
