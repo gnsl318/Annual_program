@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>573</width>
-    <height>667</height>
+    <height>709</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,165 +26,176 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="0" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_5"/>
-        </item>
-        <item row="1" column="0">
-         <widget class="QFrame" name="frame">
-          <property name="autoFillBackground">
-           <bool>false</bool>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::NoFrame</enum>
-          </property>
-          <property name="frameShadow">
-           <enum>QFrame::Raised</enum>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_3">
-           <item row="0" column="1">
-            <widget class="QPushButton" name="edit_user_btn">
-             <property name="text">
-              <string>인원관리</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0">
-            <widget class="QPushButton" name="add_user_btn">
-             <property name="text">
-              <string>인원추가</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0" colspan="2">
-            <widget class="QLineEdit" name="name_edit"/>
-           </item>
-           <item row="4" column="0" colspan="2">
-            <layout class="QHBoxLayout" name="horizontalLayout_2">
-             <item>
-              <widget class="QTimeEdit" name="start_time">
-               <property name="displayFormat">
-                <string>hh:00</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QTimeEdit" name="end_time">
-               <property name="displayFormat">
-                <string>hh:00</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item row="3" column="0" colspan="2">
-            <layout class="QHBoxLayout" name="horizontalLayout_4">
-             <item>
-              <widget class="QDateEdit" name="start_date"/>
-             </item>
-             <item>
-              <widget class="QDateEdit" name="end_date"/>
-             </item>
-            </layout>
-           </item>
-           <item row="2" column="0" colspan="2">
-            <layout class="QHBoxLayout" name="horizontalLayout_3">
-             <item>
-              <widget class="QLineEdit" name="Position_edit"/>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="Part_edit"/>
-             </item>
-             <item>
-              <widget class="QLabel" name="team_name_label">
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QFrame" name="frame">
+            <property name="autoFillBackground">
+             <bool>false</bool>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::NoFrame</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_3">
+             <item row="0" column="0" alignment="Qt::AlignVCenter">
+              <widget class="QPushButton" name="add_user_btn">
                <property name="text">
-                <string/>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignCenter</set>
+                <string>인원추가</string>
                </property>
               </widget>
              </item>
+             <item row="0" column="1" alignment="Qt::AlignRight|Qt::AlignVCenter">
+              <widget class="QPushButton" name="edit_user_btn">
+               <property name="text">
+                <string>인원관리</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0" colspan="2">
+              <widget class="QLineEdit" name="name_edit"/>
+             </item>
+             <item row="2" column="0" colspan="2">
+              <layout class="QHBoxLayout" name="horizontalLayout_3">
+               <item>
+                <widget class="QLineEdit" name="Position_edit"/>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="Part_edit"/>
+               </item>
+               <item>
+                <widget class="QLabel" name="team_name_label">
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="3" column="0" colspan="2">
+              <layout class="QHBoxLayout" name="horizontalLayout_4">
+               <item>
+                <widget class="QDateEdit" name="start_date"/>
+               </item>
+               <item>
+                <widget class="QDateEdit" name="end_date"/>
+               </item>
+              </layout>
+             </item>
+             <item row="4" column="0" colspan="2">
+              <layout class="QHBoxLayout" name="horizontalLayout_2">
+               <item>
+                <widget class="QTimeEdit" name="start_time">
+                 <property name="displayFormat">
+                  <string>hh:00</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QTimeEdit" name="end_time">
+                 <property name="displayFormat">
+                  <string>hh:00</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="5" column="0">
+              <widget class="QLabel" name="label">
+               <property name="text">
+                <string>비상연락망</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QLineEdit" name="number"/>
+             </item>
+             <item row="6" column="0" colspan="2">
+              <widget class="QGroupBox" name="groupBox">
+               <property name="title">
+                <string>근태종류</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_4">
+                <item>
+                 <layout class="QVBoxLayout" name="verticalLayout_3">
+                  <item>
+                   <widget class="QRadioButton" name="radioButton_1">
+                    <property name="text">
+                     <string>연차</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QRadioButton" name="radioButton_2">
+                    <property name="text">
+                     <string>반차</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QRadioButton" name="radioButton_3">
+                    <property name="text">
+                     <string>조퇴</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QRadioButton" name="radioButton_4">
+                    <property name="text">
+                     <string>경조휴가</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QRadioButton" name="radioButton_5">
+                    <property name="text">
+                     <string>병가</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <widget class="QLabel" name="folder_label_2">
+                  <property name="text">
+                   <string>근태사유</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QTextEdit" name="reason_text"/>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout">
+                  <item>
+                   <widget class="QPushButton" name="save_btn">
+                    <property name="maximumSize">
+                     <size>
+                      <width>68</width>
+                      <height>32</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>저장</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
+             </item>
             </layout>
-           </item>
-           <item row="6" column="0" colspan="2">
-            <widget class="QGroupBox" name="groupBox">
-             <property name="title">
-              <string>근태종류</string>
-             </property>
-             <layout class="QVBoxLayout" name="verticalLayout_4">
-              <item>
-               <layout class="QVBoxLayout" name="verticalLayout_3">
-                <item>
-                 <widget class="QRadioButton" name="radioButton_1">
-                  <property name="text">
-                   <string>연차</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QRadioButton" name="radioButton_2">
-                  <property name="text">
-                   <string>반차</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QRadioButton" name="radioButton_3">
-                  <property name="text">
-                   <string>조퇴</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QRadioButton" name="radioButton_4">
-                  <property name="text">
-                   <string>경조휴가</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QRadioButton" name="radioButton_5">
-                  <property name="text">
-                   <string>병가</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-              <item>
-               <widget class="QLabel" name="folder_label_2">
-                <property name="text">
-                 <string>근태사유</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QTextEdit" name="reason_text"/>
-              </item>
-              <item>
-               <layout class="QHBoxLayout" name="horizontalLayout">
-                <item>
-                 <widget class="QPushButton" name="save_btn">
-                  <property name="maximumSize">
-                   <size>
-                    <width>68</width>
-                    <height>32</height>
-                   </size>
-                  </property>
-                  <property name="text">
-                   <string>저장</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-             </layout>
-            </widget>
-           </item>
-          </layout>
-         </widget>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>

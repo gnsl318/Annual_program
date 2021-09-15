@@ -11,6 +11,7 @@ from login import Login
 from crud.crud_user import *
 from crud.crud_annual import *
 import pandas as pd
+from send_mail import mail
 
 
 
@@ -26,6 +27,7 @@ class App(QMainWindow, form_class):
         self.setupUi(self)
         self._db = next(session.get_db())
         self.func()
+        self.mail= mail()
         if self.admin:
             self.set_table()
         
@@ -55,9 +57,11 @@ class App(QMainWindow, form_class):
                 create_annual(db=self._db,in_name=self.name,start_day=self.start_date.text(),end_day=self.end_date.text(),
                 start_time=self.start_time.text(),end_time=self.end_time.text(),in_kind=button.text(),annual_txt=self.reason_text.toPlainText())
                 update_annual_day(db=self._db,name=self.name,kind=button.text())
+                self.mail.make_report(in_name=self.name,part=self.part,position=self.position,start_day=self.start_date.text(),end_day=self.end_date.text(),start_time=self.start_time.text(),end_time=self.end_time.text(),in_kind=button.text(),annual_txt=self.reason_text.toPlainText(),number=self.number.text())
+                self.mail.send_mail()
                 if self.admin:
                     self.set_table()
-    
+        self.show_message("완료")
     
     def login_page(self):
         Login_app = Login()
