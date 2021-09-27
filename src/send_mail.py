@@ -17,7 +17,7 @@ class mail():
         self.email = data["email"]
         self.pw = data["pw"]
 
-    def send_mail(self):
+    def send_mail(self,name,start_day,end_day):
         smtp = smtplib.SMTP('smtp.cafe24.com',587)   # 587: 서버의 포트번호
         #smtp.connect("www.webmail.seoreu.com",465)
         smtp.ehlo()
@@ -30,9 +30,13 @@ class mail():
         except:
             print("loging실패")
         msg = MIMEMultipart()
-        msg['Subject'] = "연차신청서"
+        if start_day == end_day:
+            msg['Subject'] = f"연차신청서_{start_day}_{name}"
+        elif start_day != end_day:
+            msg['Subject'] = f"연차신청서_{start_day},{end_day[-1]}_{name}"
         msg['From'] = "seoreu@seoreu.com"
         msg['to'] = "soo_cheol@seoreu.com"
+        msg['Cc'] = "choi_th@seoreu.com"
         msg.preamble="?"
         file = f"{os.path.join(os.pardir,'연차신청서.xlsx')}"
 
